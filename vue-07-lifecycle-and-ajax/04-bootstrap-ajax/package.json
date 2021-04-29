@@ -1,0 +1,17 @@
+{
+  "name": "04-bootstrap-homepage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "pubsub-js": "^1.9.3",
+    "vue": "^2.6.12"
+  }
+}

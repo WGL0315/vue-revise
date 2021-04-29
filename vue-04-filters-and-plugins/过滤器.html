@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过滤器</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 在花括号'{{}}'中使用示例 -->
+        <h3>过滤器接收多个参数：</h3>
+        <p>{{ content | contentFilter }}</p>
+        
+        <h3>过滤器件接收多个参数：</h3>
+        <p>{{ vueScore | add(javaScore, pythonScore) }}</p>
+
+        <!-- 在'v-bind'中使用示例 -->
+        <input type="text" :value="content | contentFilter">
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js" type="text/javascript"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                content: '傻吊,你TMD就是个SB',
+                vueScore: 8,
+                javaScore: 9,
+                pythonScore: 10
+            },
+            beforeCreate() {
+                console.log("创建前");
+            },
+            created() {
+                console.log("创建后");
+            },
+            beforeMount() {
+                console.log("挂载前");
+            },
+            mounted() {
+                console.log("挂载后");
+            },
+            // 局部过滤器。是filters(复数）,而不是filter,因为该选项能注册多个过滤器，所以用复数形式，全局注册才是单数形式
+            filters: {
+                contentFilter(value){ //value是调用时，'|'左边的那个属性值
+                    if(!value){ //如果内容为空，则返回''
+                        return '';
+                    }else {  //若内容不为空，则返回替换后的内容
+                        // return value.toLowerCase();
+                        return value.toUpperCase().replace('TMD', '他妈的').replace('SB', '***');
+                    }
+                },
+                add(num1, num2, num3){ //num1是调用时，'|'左边的那个属性值
+                    return num1 + num2 + num3;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

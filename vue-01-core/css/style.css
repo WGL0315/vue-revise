@@ -1,0 +1,46 @@
+* {
+    margin: 0px 0px;
+    padding: 0px 0px;
+}
+.app {
+    padding: 20px;
+    background: #17768a;
+}
+.app p {
+    font-size: 16px;
+    line-height: 30px;
+    color: #ffffff;
+    text-align: left;
+}
+.app p span {
+    font-weight: bold;
+}
+button {
+    border: none;
+    line-height: 30px;
+    background: aliceblue;
+    color: black;
+    padding: 0px 20px;
+    margin-top: 10px;
+}
+input {
+    border: none;
+}
+.active {
+    color: yellow !important;
+}
+.delete {
+    color: red !important;
+}
+.error {
+    font-size: 30px !important;
+}
+.box {
+    width: 200px;
+    height: 200px;
+    background: red;
+}
+form {
+    border: 1px solid red;
+    padding: 20px;
+}

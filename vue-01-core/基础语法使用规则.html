@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01-helloworld</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app" class="app">
+        <div>
+            <p>普通文本<span>{{msg}}</span></p>
+            <p>js表达式: {{ num +1 }}</p>
+            <p v-once>一次性插值{{msg}}</p>
+            <p>v-html:
+                <span v-html="contentHtml"></span>
+            </p>
+        </div>
+        <br><br>
+
+        <div>
+            <p><img v-bind:src="imgSrc" alt="" srcset=""></p>
+            <p><button v-on:click="add">点击加1</button></p>
+            <p>数学：<input type="text" v-model="math"></p>
+            <p>英语：<input type="text" v-model="english"></p>
+            <p>总分（方法-单向）：<input type="text" v-model="sumScore()"></p>
+            <p>总分（计算属性-单向）：<input type="text" v-model="sumScore1"></p>
+            <p>总分（计算属性-双向）：<input type="text" v-model="sumScore2"></p>
+            <p>总分（监听器）：<input type="text" v-model="sumScore3"></p>
+        </div>
+        <br><br>
+
+        <div>
+            <p v-bind:class="activeClass">字符串表达式</p>
+            <p :class="{delete: isDelete, error: hasError}">对象表达式</p>
+            <p :class="['active', 'error']">数组表达式</p>
+            <p :style="{color: activeColor,fontSize: fontSize+'px'}">Style绑定</p>
+        </div>
+        <br><br>
+
+        <div>
+            <h2>v-if条件渲染</h2>
+            <input type="checkbox" v-model="seen">勾选后显示红块
+            <div v-if="seen" class="box"></div>
+            <p v-else="seen">红块已隐藏</p>
+            <h2>v-show条件渲染</h2>
+            <div v-show="seen" class="box"></div>
+        </div>
+        <br><br>
+
+        <div>
+            <h2>v-for迭代数组</h2>
+            <ul>
+                <li v-for="(e, index) in emps" ::key="index">
+                    编号: {{ index+1 }};姓名：{{e.name}};工资：{{e.salary}}
+                </li>
+            </ul>
+            <br>
+            <h2>v-for迭代对象</h2>
+            <ul>
+                <li v-for="(value, key, index) in emps[0]">
+                    第{{index+1}}个属性为：{{key}} = {{value}}
+                </li>
+            </ul>
+        </div>
+        <br><br>
+
+        <div>
+            <h2>事件处理方法</h2>
+            <button @click="say">Say {{ msg }}</button><br>
+            <button @click="warn('hello', $event)">Warn</button>
+        </div>
+        <br><br>
+
+        <div>
+            <div>
+                <button @click.stop="stopEvent">stop</button>
+                <div>
+                    <div>
+                        <button @click="startEvent">start</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+
+        <div>
+            <h2>按键修饰符</h2>
+            <input type="text" @keyup.enter="keyEnter"><br>
+            <input type="text" @keyup.space="keySpace"><br>
+        </div>
+        <br><br>
+
+        <div>
+            <h2>v-model  双向数据绑定</h2>
+            <form action="#" @submit.prevent="submitForm">
+                姓名（文本）：<input type="text" v-model="name"><br>
+                <br>
+
+                性别（单选按钮）：<br>
+                <input type="radio" name="sex" value="1" v-model="sex">男<br>
+                <input type="radio" name="sex" value="0" v-model="sex">女<br>
+                <br>
+
+                技能（多选框）：<br>
+                <input type="checkbox" name="skills" value="java" v-model="skills">java <br>
+                <input type="checkbox" name="skills" value="vue" v-model="skills">vue<br>
+                <input type="checkbox" name="skills" value="python" v-model="skills">python <br>
+                <br>
+
+                城市（下拉框）：
+                <select name="citys" id="" v-model="city">
+                    <option v-for="c in citys" :value="c.code">
+                        {{ c.name }}
+                    </option>
+                </select>
+                <br><br>
+
+                说明（多行文本）：<br>
+                <textarea name="" id="" cols="30" rows="10" v-model="desc"></textarea>
+                <br><br>
+
+                <button type="submit">提交</button>
+
+            </form>
+        </div>
+        
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'Vue',
+                num: 1,
+                contentHtml: `<span style="color: red;">v-html测试<script>alert("haha");<\/script></span>`,
+                imgSrc: './images/avatar.jpg',
+                math: 80,
+                english: 7,
+                sumScore3: 0,
+                activeClass: 'active',
+                isDelete: true,
+                hasError: false,
+                activeColor: 'red',
+                fontSize: 20,
+                seen: false,
+                emps: [
+                    {name: "马云", salary: "2万"},
+                    {name: "马化腾", salary: "3万"},
+                    {name: "刘强东", salary: "4万"},
+                ],
+                name: '',
+                sex: 0,
+                skills: ["vue"],
+                citys: [
+                    {code:"beijing", name: "北京"},
+                    {code:'shanghai', name: "上海"},
+                    {code: "shenzhen", name: "深圳"}
+                ],
+                city: "shengzhen",
+                desc: ""
+            },
+            methods: {
+                add: function(){
+                    console.log('add被调用');
+                    vm.num++
+                },
+                sumScore: function(){
+                    console.log("sumScore");
+                    // return this.math + this.english;
+                    return (this.math - 0)+(this.english-0);
+                },
+                say: function(event){
+                    alert(this.msg);
+                    alert(event.target.innerHTML);
+                },
+                warn: function(msg, event){
+                    alert(msg + ','+event.target.tagName);
+                },
+                startEvent: function(){
+                    alert("start!");
+                },
+                stopEvent: function(){
+                    alert("stop!");
+                },
+                keyEnter: function(e){
+                    console.log("enter",e);
+                },
+                keySpace: function(e){
+                    console.log("space", e);
+                },
+                submitForm: function(){
+                    console.log(this.name + "," + this.sex + ",", + this.skills + "," + this.city + ","+this.desc);
+                }
+            },
+            computed: {
+                sumScore1: function(){
+                    console.log("sumScore1");
+                    // return this.math + this.english;
+                    return (this.math - 0)+(this.english-0);
+                },
+                sumScore2: {
+                    get: function(){
+                        console.log("sumScore2");
+                        // return this.math + this.english;
+                        return (this.math - 0)+(this.english-0);
+                    },
+                    set: function(newValue){
+                        var avg = newValue/2;
+                        this.english = avg;
+                        this.math = avg;
+                    }
+                }
+            },
+            watch: {
+                math: function(newValue, oldValue){
+                    this.sumScore3 = (newValue - 0) + (this.english - 0);
+                }
+            }
+        });
+
+        vm.$watch('english', function(newValue){
+            this.sumScore3 = (newValue - 0)+(this.math - 0);
+        });
+    </script>
+</body>
+</html>

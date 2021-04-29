@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义插件</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 引用指令时，不要少了'v-' -->
+        <span v-my-directive = 'content'></span>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js" type="text/javascript"></script>
+    <script src="js/plugins.js"></script>
+    <script type="text/javascript">
+        //通过全局方法Vue.use()使用插件。引入自定义插件MyPlugin。注意要在new Vue()实例之前引用 
+        Vue.use(MyPlugin); //myPlugin是plugin.js里面自定义的插件名称
+
+        // 创建vue实例，模板中使用引用全局指令v-my-directive = 'content'
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                content: 'hello'
+            }
+        });
+
+        // 调用自定义的全局方法，所以是Vue调用，不是vm
+        Vue.myGlobalMethod();
+
+        // 调用Vue实例方法，所以是vm调用，不是Vue
+        vm.$myMethod('我的插件测试');
+    </script>
+</body>
+</html>

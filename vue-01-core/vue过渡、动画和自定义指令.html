@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue过渡、动画和自定义指令</title>
+    <style>
+        body {
+            background: #17768a;
+        }
+        .demo-active, .demo-leave-active {
+            transition: opacity 1s;
+        }
+        .demo-enter, .demo-leave-to {
+            opacity: 0;
+        }
+
+        .demo1-enter-active {
+            transition: all 1s;
+        }
+        .demo1-leave-active {
+            transition: all 5s;
+        }
+        .demo1-enter, .demo1-leave-to {
+            opacity: 0;
+            transform: translateX(10px);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="show != show">渐变过渡</button><br>
+        <transition name="demo">
+            <p v-if="show">渐变</p>
+        </transition>
+    </div>
+    <div id="app1">
+        <button @click="show != show">渐变平滑过渡</button><br>
+        <transition name="demo1">
+            <p v-if="show">渐变平滑</p>
+        </transition>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                show: true,
+            }
+        });
+        var vm2 = new Vue({
+            el: '#app1',
+            data: {
+                show: true
+            }
+        });
+    </script>
+</body>
+</html>

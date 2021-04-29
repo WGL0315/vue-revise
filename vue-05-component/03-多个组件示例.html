@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多个组件示例</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 通过组件名称直接使用 -->
+        <app-header></app-header>
+        <app-main></app-main>
+        <app-footer></app-footer>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js" type="text/javascript"></script>
+    <!-- 要在vue.js下面引入组件 -->
+    <script src="component/Header.js" type="text/javascript"></script>
+    <script src="component/Main.js" type="text/javascript"></script>
+    <script src="component/Footer.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app',
+            components: {
+
+            }
+        })
+    </script>
+</body>
+</html>

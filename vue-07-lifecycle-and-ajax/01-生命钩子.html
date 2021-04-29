@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue生命周期钩子函数</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="msg">
+    </div>
+    <script src="./node_modules/vue/dist/vue.js" type="text/javascript"></script>
+    <script src="" type="text/javascript"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '1000',
+                destroy: false,
+            },
+            beforeCreate() {
+                // 数据和模板均未获取到
+                console.log('beforeCreate: ', this.$el, this.$data);
+            },
+            created() {
+                // 已初始化data，但数据未挂载到模板中
+                console.log('created: ', this.$el, this.$data);
+            },
+            beforeMount() {
+                // 模板已获取到，但数据未挂载到模板上
+                console.log('beforeMount: ', this.$el, this.$data);
+            },
+            mounted() {
+                // 编译完成，数据已挂载到模板中
+                console.log('mounted: ', this.$el, this.$data);
+            },
+            beforeUpdate() {
+                // 当data改变后，更新模板中的数据前 被调用
+                // 注意：浏览器问题，需要使用this.$el.innerHTML获取更新前的Dom模板数据
+                console.log('beforeUpdate: ', this.$el.innerHTML, this.$data);
+            },
+            updated() {
+                // data被Vue渲染之后的Dom数据模板
+                console.log('updated: ', this.$el.innerHTML, this.$data);
+            },
+            beforeDestroy() {
+                // 实例被销毁前调用
+                console.log('beforeDestroy: ', this.$el, this.$data);
+            },
+            destroyed() {
+                // 实例被销毁后调用
+                console.log('destroyed: ', this.$el, this.$data);
+            },
+            computed: {
+                changeString(){
+                    console.log("改变字符串");
+                }
+            },
+            methods: {
+                test(){
+                    console.log('测试');
+                }
+            },
+        }).$mount('#app'); //若实例中未使用el选项，可使用$mount()手动挂载Dom
+
+        vm.test();
+    </script>
+</body>
+</html>

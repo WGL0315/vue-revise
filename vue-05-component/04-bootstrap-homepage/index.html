@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <title>bootstrap首页组件化</title>
+</head>
+<body>
+    <div id="app">
+        <app></app>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js" type="text/javascript"></script>
+    <!-- 注意：要在vue.js下面引入 -->
+    <script src="./component/AppNavBar.js" type="text/javascript"></script>
+    <script src="./component/AppLeft.js" type="text/javascript"></script>
+    <!-- 注意：Dashbord.js和HomeList.js要在AppHome.js前面引入 -->
+    <script src="./component/home/DashBord.js" type="text/javascript"></script>
+    <script src="./component/home/Item.js" type="text/javascript"></script>
+    <script src="./component/home/HomeList.js" type="text/javascript"></script>
+    <script src="./component/AppHome.js" type="text/javascript"></script>
+    <script src="./App.js" type="text/javascript"></script>
+    <script src="./main.js" type="text/javascript"></script>
+</body>
+</html>
